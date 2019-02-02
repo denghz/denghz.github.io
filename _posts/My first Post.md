@@ -3,7 +3,7 @@ layout:     post
 title:      My first Post
 subtitle:   My first Post
 date:       2017-01-06
-author:     DHZ
+author:     BY
 header-img: img/post-bg-ios9-web.jpg
 catalog: true
 tags:
