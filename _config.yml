@@ -11,7 +11,7 @@ github_repo: "https://github.com/denghz/denghz.github.io.git" # you code reposit
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Goals determine what you going to be!"
+sidebar-about-description: "我年华虚度，空有一身疲倦"
 sidebar-avatar: /img/dhz.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
