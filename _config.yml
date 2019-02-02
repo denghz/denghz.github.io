@@ -1,6 +1,6 @@
 # Site settings
-title: DHZ Blog
-SEOTitle: DHZ的博客 | DHZ Blog
+title: Dhz Blog
+SEOTitle: DHZ的博客 | Dhz Blog
 header-img: img/post-bg-desk.jpg
 email: denghz1998@gmail.com
 description: "Every failure is leading towards success."
@@ -12,7 +12,7 @@ github_repo: "https://github.com/denghz/denghz.github.io.git" # you code reposit
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Goals determine what you going to be!"
-sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/dhz.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -100,4 +100,4 @@ service-worker: true
 friends: [
 ]
 
-theme: jekyll-theme-cayman
+
