@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      ReactiveCocoa 进阶
-subtitle:   函数式编程框架 ReactiveCocoa 进阶
+title:      My first Post
+subtitle:   My first Post
 date:       2017-01-06
-author:     BY
+author:     DHZ
 header-img: img/post-bg-ios9-web.jpg
 catalog: true
 tags:
