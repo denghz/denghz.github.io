@@ -62,7 +62,7 @@ disqus_username: dhz
 # Gitalk
 # gitalk:
 #   enable: true    #
-是否开启Gitalk评论
+# 是否开启Gitalk评论
 #   clientID: f10d8322e2b6920ccc07                           #生成的clientID
 #   clientSecret: a605b518e6bf640ddf52766e63619800a010d1f2  #生成的clientSecret
 #   repo: denghz.github.io    #仓库名称
