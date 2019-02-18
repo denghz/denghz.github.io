@@ -1,6 +1,6 @@
 ---
 layout:     post   				    # 使用的布局（不需要改）
-title:      DP or Recursion ?			# 标题 
+title:      DP and Recursion			# 标题 
 subtitle:   A little thought about Lambda Calculus #副标题
 date:       2019-02-17			# 时间
 author:     DHZ 						# 作者
