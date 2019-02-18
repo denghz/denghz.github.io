@@ -139,12 +139,34 @@ Or we can define a clever `open_fib` to make it use 'open recursion' rather than
 
 ```haskell
 open_fib :: (Int -> Int) -> Int -> Int
-open_fib memo_fib 0 = 0
+open_fib memo_fib 0 = 1
 open_fib memo_fib 1 = 1
 open_fib memo_fib n =  memo_fib (n-1) + memo_fib (n-2)
 ```
 
 You can get unmemoized `fib` by using `fix open_fib`  where `fix f = let {x = f x} in x`, which means that `fib ` is the minimal fix point of the high-order function `open_fib`. We call the high-order function that produces a fix point of a function fix-point combinator.
+
+Let’s expand the `fix open_fib` to see  to explain what happens:
+
+```haskell
+-- fix f = let {g = f g} in g
+fix open_fib
+= open_fib (fix open_fib)
+= (\rec n -> if n <= 1 then 1 else rec (n-1) + rec (n-2)) (fix open_fib)
+= \n -> if n <= 1 then 1 else fix open_fib $ (n-1) + fix open_fib $ (n-2)
+= \n -> if n <= 1 then 1
+		else (if n - 1 <= 1 then 1 else fix open_fib $ (n-2) + fix open_fib $ (n-3))
+			+(if n - 2 <= 1 then 1 else fix open_fib $ (n-3) + fix open_fib $ (n-4))
+= \n -> if n <= 1 then 1
+		else (if n - 1 <= 1 then 1 else 
+								   if n - 2 <= 1 then 1 else
+								   						...)
+			+(if n - 2 <= 1 then 1 else
+								   if n - 3 <= 1 then 1 else
+								   						...)
+```
+
+Notice that the use of `fix` allows us to keep "unravelling" the definition of `open_fib`: every time we hit the `else` clause, we product another copy of `open_fib` via the evaluation rule `fix open_fib = open_fib (fix open_fib)`, which functions as the next call in the recursion chain. Because of the **Lazy Evaluation Mechanism**, `open_fib` would only evaluate the `fix open_fib` inside if it is needed, otherwise if the argument `n`of `open_fib (fix open_fib)` is 1 or 0 , then it would just return 1. So eventually we hit the `then` clause and bottom out of this chain.
 
 Then we are prepared to define the `memo` combinator, which is a fix point combinator like `fix` , but generating a memoized `memo_fib`  from `open_fib` , which can be used in the intuitive way.
 
