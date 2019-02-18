@@ -144,9 +144,9 @@ open_fib memo_fib 1 = 1
 open_fib memo_fib n =  memo_fib (n-1) + memo_fib (n-2)
 ~~~
 
-You can get unmemoized `fib` by using `fix open_fib`  where `fix f = let {x = f x} in x`, which means that `fib ` is the minimal fix point of the high-order function `open_fib`. We call the high-order function that produces a fix point of a function fix-point combinator.
+You can get unmemoized `fib` by using `fix open_fib`  where `fix f = let {x = f x} in x`, which means that `fib` is the minimal fix point of the high-order function `open_fib`. We call the high-order function that produces a fix point of a function fix-point combinator.
 
-Let’s expand the `fix open_fib` to see  to explain what happens:
+Let’s expand the `fix open_fib` to explain what happens:
 
 ~~~haskell
 -- fix f = let {g = f g} in g
