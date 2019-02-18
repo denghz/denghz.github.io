@@ -50,7 +50,7 @@ fib n = fib (n-1) + fib (n-2)
 
 in *Haskell*
 
-Then you will observe that when calculating every $fib(n)$ , there are $2n$ calls of $fib$ , but only $n$ of them are different, *e.g.* $fib(5) = fib(4) + fib(3)$ and $fib(4) = fib(3) + fib(2)$ . $fib(3)$ is called **twice** in calculating $fib(5)$ . By careful calculation, you will find that the running time of the naive recursion is exponential. That’s why we need to use **Dynamic Programming**, *e.g.*
+Then you will observe that when calculating every $$fib(n)$$ , there are $$2n$$ calls of $$fib$$ , but only $$n$$ of them are different, *e.g.* $$fib(5) = fib(4) + fib(3)$$ and $$fib(4) = fib(3) + fib(2)$$ . $$fib(3)$$ is called **twice** in calculating $$fib(5)$$ . By careful calculation, you will find that the running time of the naive recursion is exponential. That’s why we need to use **Dynamic Programming**, *e.g.*
 
 ```scala
 val fib: Int => Int = n => {
@@ -63,7 +63,7 @@ val fib: Int => Int = n => {
 	}
 ```
 
-or maybe a more clever way, since we only need to know $fib(n-1)$ and $fib(n-2)$ to calculate $fib(n)$ 
+or maybe a more clever way, since we only need to know $$fib(n-1)$$ and $$fib(n-2)$$ to calculate $$fib(n)$$ 
 
 ```scala
 val fib: Int => Int = n => {
