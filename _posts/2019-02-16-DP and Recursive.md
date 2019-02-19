@@ -207,7 +207,7 @@ val memorize:(Int => Int) => Int => Int = f => {
   }
 }
 
-var fib = memorize(fib)
+fib = memorize(fib)
 ~~~
 
 It seems prefect, but there is a trap. If we change the name of function on line 18 from `fib` to `memo_fib`, the `memo_fib` would be a fake `memo_fib` which is unmemoized. The reason is that the `fib` in `memorize` is still the **uncached** ` fib`, not `memo_fib`.
