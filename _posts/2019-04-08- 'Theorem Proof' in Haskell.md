@@ -19,7 +19,7 @@ tags:								#标签
 
 It sounds really weird that program are proofs, but this is where it gets *really* fun.
 
-Think about the types in the simple typed language calculus. Anything which can be formed from the following grammar is a lambda calculus type:
+Think about the types in the simple typed language:
 
 ```
 type ::= primitive | function | ( type )
@@ -31,24 +31,22 @@ Look at the type "A -> A". Now, instead of seeing "->" as the function type cons
 
 Now, look at "A -> B". That's *not* a theorem, unless there's some other context that proves it. As a function type, that's the type of a function which, without including any context of any kind, can take a parameter of type A, and return a value of a *different* type B. You can't do that - there's got to be some context which provides a value of type B - and to access the context, there's got to be something to allow the function to access its context: a free variable. Same thing in the logic and the lambda calculus: you need some kind of context to establish "A->B" as a theorem (in the logic)
 
-It gets better. If there is a closed expression whose type is a theorem in the corresponding intuitionistic logic, then the expression that has that type *is a proof* of the theorem.
+If there is a closed expression whose type is a theorem in the corresponding intuitionistic logic, then the expression that has that type *is a proof* of the theorem.
 
 ![curry-howard-iso](/img/curry-howard-iso.jpg)
 
-Examples here are all inspired some questions on [codewars](codewars.com) 
-
-As all we known, Haskell doesn't have [dependent type](<https://en.wikipedia.org/wiki/Dependent_type>), but we can get very close with extensions like "GADT (Generalized Algebraic Data Type)", and prove theorem by it.
+As all we known, Haskell doesn't have [dependent type](<https://en.wikipedia.org/wiki/Dependent_type>), but we can get very close with extensions, e.g. "GADT (Generalized Algebraic Data Type)", and prove theorem by it.
 
 ### Use GADT to "simulate" Dependent Type
 
-First we need types to be the **values**
+First we need types to represent **values**
 
 ```haskell
 data Z
 data S n
 ```
 
-Notice that `Z` and `S n` are just types, you cannot even construct some values with these types. So we need to connect them with some values we can construct.
+Notice that `Z` and `S n` are just types, you cannot construct values with these types. We need to connect them with some values we can construct.
 
 ```haskell
 data Nat :: * -> * where
@@ -65,11 +63,11 @@ Now we have natural numbers whose values is represented by types .
 
 In another words, its type is isomorphic to its value.
 
-It is meaningless to have only numbers, we need to build arithmetic on it.
+It is meaningless to have only numbers, so the next thing is to build arithmetic on it.
 
-So what would be `Nat n + Nat m` ?
+What would be `Nat n + Nat m` ?
 
-First it should by a `Nat`, and its type should correspond to the sum.
+Firstly, it should by a `Nat`, and then its type should correspond to the sum.
 
 With the help of GHC's Type Family and Type Operator extension, we can give reasonable definition of addition and multiplication on the level of types.
 
@@ -115,7 +113,7 @@ VNil ++ ys = ys
 VCons x xs ++ y = VCons x (xs ++ y)
 ```
 
-As long as we have length information, them we can build `safeHead` and `safeTail` now. 
+As long as we have length information, them we can build `safeHead` and `safeTail`. 
 
 ```haskell
 safeHead :: Vec a (S n) -> a
@@ -129,7 +127,7 @@ The type `Vec a (S n)` says that the input vector cannot be empty, so these two 
 
 We can define *subtraction/maximum/minimum* type operator and then some other utility function of `Vector` in similar ways.
 
-Give priorities to type operators
+Give priorities to type operators to save some brackets later.
 
 ```haskell
 infixl 2 ===
@@ -140,9 +138,9 @@ infixl 5 :*:
 
 ### Proof Simple Theorem now!
 
-`Haskell` doesn't have `Prop`, so we need to describe ”Equal" from scratch.
+`Haskell` doesn't have `Prop`, so we need to describe "Equal" from scratch.
 
-First define the type meaning that two `Nat` equal.
+Start with defining the type which means two `Nat` equal.
 
 ```haskell
 data Equal :: * -> * -> * where
@@ -153,7 +151,7 @@ infixl 2 === -- priority 2
 type x === y = Equal x y -- give Equal x y a shorter name
 ```
 
-Now we prove that `Equal` is an equivalence relationship.
+Now prove that `Equal` is an equivalence relationship.
 
 It's reflexive.   $$n = n$$
 
@@ -218,7 +216,7 @@ Then use the lemma to prove the theorem.
 
 Here comes the multiplication.
 
-The idea is almost the same, but need more lemmas, like:
+The idea is almost the same, but need more lemmas, e.g.:
 
 ```haskell
 multCommuteS :: Nat n -> Nat m -> m :*: S n === m :+: m :*: n
@@ -256,7 +254,7 @@ multCommutes (Succ n) m = symm
 
 ### Beyond the Naturals
 
-We have just described the "Equal" of Naturals, but how to describe "Equal" of any value ?
+We have just described the "Equal" of Naturals, but how to describe "Equal" of any value?
 
 ```haskell
 data Equal :: * -> * -> * where
@@ -264,7 +262,7 @@ data Equal :: * -> * -> * where
       Derive :: Equal a b -> Equal (p a) (p b)
 ```
 
-`Refl` corresponds to `EqZ`, `Derive` corresponds to `EqS`. From the definition, `Refl` is reflexivity.  `sym` 's definition is similar to before, but the proof of transitivity needs to be changed.
+`Refl` corresponds to `EqZ`, `Derive` corresponds to `EqS`. From the definition, `Refl` is reflexivity.  `sym` 's definition is similar to before, but the proof of transitivity needs to be modified.
 
 ```haskell
 (<=>) :: a === b -> b === c -> a === c
@@ -329,3 +327,38 @@ demorgan Fa Tr = Refl
 demorgan Fa Fa = Refl
 ```
 
+Similarly, we can prove some properties of Naturals by type families, e.g. parity.
+
+```haskell
+type family IsOdd (n :: *) :: *
+type instance IsOdd Z = F
+type instance IsOdd (S Z) = T
+type instance IsOdd (S (S n)) = IsOdd n
+  
+type family IsEven (n :: *) :: *
+type instance IsEven Z = T
+type instance IsEven (S Z) = F
+type instance IsEven (S (S n)) = IsEven n
+```
+##### Other ways to describe **Property**
+
+We use `Equal` to describe that two types equal, in the same way, we can describe some other relationships, e.g.
+another way of describing parity:
+
+```haskell
+data Even :: * -> * where
+      ZeroEven :: Even Z
+      Add2Even :: Even n -> Even (S (S n))
+  
+data Odd :: * -> * where
+      OneOdd :: Odd (S Z)
+      Add2Odd :: Odd n -> Odd (S (S n))
+```
+or x > y?
+
+```haskell
+data Greater :: * -> * where
+      GreZ :: Greater (S Z) Z
+      GreS1 :: Greater x y -> Greater (S x) y
+      GreS2 :: Greater x y -> Greater (S x) (S y)
+```
