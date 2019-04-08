@@ -1,6 +1,6 @@
 ---
 layout:     post   				    # 使用的布局（不需要改）
-title:      '"Theorem Proof" in Haskell'			# 标题 
+title:      'Theorem Proof in Haskell'			# 标题 
 subtitle:   '类型即命题，程序则证明' #副标题
 date:       2019-04-08 	# 时间
 author:     DHZ 						# 作者
