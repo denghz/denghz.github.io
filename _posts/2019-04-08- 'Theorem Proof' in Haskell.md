@@ -33,7 +33,7 @@ Now, look at "A -> B". That's *not* a theorem, unless there's some other context
 
 It gets better. If there is a closed expression whose type is a theorem in the corresponding intuitionistic logic, then the expression that has that type *is a proof* of the theorem.
 
-![curry-howard-iso](C:\Users\steve\OneDrive - Nexus365\Documents\GitHub\denghz.github.io\img\curry-howard-iso.jpg)
+![curry-howard-iso](img\curry-howard-iso.jpg)
 
 Examples here are all inspired some questions on [codewars](codewars.com) 
 
