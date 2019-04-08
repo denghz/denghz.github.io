@@ -2,7 +2,7 @@
 layout:     post   				    # 使用的布局（不需要改）
 title:      '"Theorem Proof" in Haskell'			# 标题 
 subtitle:   '类型即命题，程序则证明' #副标题
-date:       2019-04-08 	# 时间
+date:       2019-02-16 	# 时间
 author:     DHZ 						# 作者
 header-img: img/curry-howard-iso.jpg	#这篇文章标题背景图片
 catalog: true 						# 是否归档
@@ -32,6 +32,8 @@ Look at the type "A -> A". Now, instead of seeing "->" as the function type cons
 Now, look at "A -> B". That's *not* a theorem, unless there's some other context that proves it. As a function type, that's the type of a function which, without including any context of any kind, can take a parameter of type A, and return a value of a *different* type B. You can't do that - there's got to be some context which provides a value of type B - and to access the context, there's got to be something to allow the function to access its context: a free variable. Same thing in the logic and the lambda calculus: you need some kind of context to establish "A->B" as a theorem (in the logic)
 
 It gets better. If there is a closed expression whose type is a theorem in the corresponding intuitionistic logic, then the expression that has that type *is a proof* of the theorem.
+
+![curry-howard-iso](C:\Users\steve\OneDrive - Nexus365\Documents\GitHub\denghz.github.io\img\curry-howard-iso.jpg)
 
 Examples here are all inspired some questions on [codewars](codewars.com) 
 
