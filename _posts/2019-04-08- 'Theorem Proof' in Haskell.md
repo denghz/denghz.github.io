@@ -2,6 +2,7 @@
 layout:     post   				    # 使用的布局（不需要改）
 title:      '"Theorem Proof" in Haskell'			# 标题 
 subtitle:   '类型即命题，程序则证明' #副标题
+# permalink:
 date:       2019-04-08 	# 时间
 author:     DHZ 						# 作者
 header-img: img/haskell.jpg	#这篇文章标题背景图片
