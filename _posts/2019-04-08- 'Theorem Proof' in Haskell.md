@@ -4,7 +4,7 @@ title:      '"Theorem Proof" in Haskell'			# 标题
 subtitle:   '类型即命题，程序则证明' #副标题
 date:       2019-02-16 	# 时间
 author:     DHZ 						# 作者
-header-img: img/curry-howard-iso.jpg	#这篇文章标题背景图片
+header-img: img/haskell.jpg	#这篇文章标题背景图片
 catalog: true 						# 是否归档
 tags:								#标签
     - lambda calculus
