@@ -68,7 +68,7 @@ It is meaningless to have only numbers, so the next thing is to build arithmetic
 
 What would be `Nat n + Nat m` ?
 
-Firstly, it should by a `Nat`, and then its type should correspond to the sum.
+Firstly, it should be a `Nat`, and then its type should correspond to the sum.
 
 With the help of GHC's Type Family and Type Operator extension, we can give reasonable definition of addition and multiplication on the level of types.
 
